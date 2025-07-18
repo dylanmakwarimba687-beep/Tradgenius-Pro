@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeGenius Pro - Analysis</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">TradeGenius Pro</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="signals.html">Signals</a></li>
+                <li><a href="analysis.html">Analysis</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="alerts.html">Alerts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-container">
+        <section class="hero">
+            <h1>Deep Quantum Market Analysis</h1>
+            <p>Real-time technical, sentiment, and correlation analytics for all markets.</p>
+        </section>
+        <section class="dashboard">
+            <div class="widget"><h3>📊 Technical Analysis</h3><p>RSI: ${Math.floor(Math.random()*100)} | MACD: ${['Bullish','Bearish'][Math.floor(Math.random()*2)]} | Bollinger: ${['Oversold','Overbought'][Math.floor(Math.random()*2)]}</p></div>
+            <div class="widget"><h3>📡 Sentiment Analysis</h3><p>Social Sentiment: ${['Bullish','Bearish','Neutral'][Math.floor(Math.random()*3)]} | Fear & Greed: ${Math.floor(Math.random()*100)}</p></div>
+            <div class="widget"><h3>🔗 Correlation Matrix</h3><p>BTC-ETH: ${(Math.random()*2-1).toFixed(2)} | USD-GOLD: ${(Math.random()*2-1).toFixed(2)}</p></div>
+            <div class="widget"><h3>🗓️ Economic Calendar</h3><ul>
+                <li>USD Non-Farm Payrolls: 14:30 (High Impact)</li>
+                <li>Fed Chair Speech: 18:00 (High Impact)</li>
+            </ul></div>
+        </section>
+        <section class="ai-assistant" id="aiAssistantSection">
+            <h2>🤖 AI Trading Assistant</h2>
+            <p>Ask anything about analysis, get personalized insights.</p>
+            <div class="ai-chat" id="aiChat">
+                <div style="color: #00ff88; margin-bottom: 1rem;">
+                    <strong>AI Assistant:</strong> What analysis do you need today?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Ask about technical, sentiment, or correlation analysis..." />
+                <button id="aiSendBtn">Send</button>
+            </div>
+        </section>
+    </main>
+    <div class="floating-widget" id="assistantWidget" title="Chat with AI Assistant">🤖</div>
+    <script src="assets/script.js"></script>
+</body>
+</html>

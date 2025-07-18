@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeGenius Pro - Signals</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">TradeGenius Pro</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="signals.html">Signals</a></li>
+                <li><a href="analysis.html">Analysis</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="alerts.html">Alerts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-container">
+        <section class="hero">
+            <h1>Live AI Signals & Technical News</h1>
+            <p>Choose your market to view live signals and news analysis.</p>
+        </section>
+        <section>
+            <form id="marketForm" style="text-align:center;">
+                <label for="marketSelect">Select Market:</label>
+                <select id="marketSelect">
+                    <option value="BTC/USD">BTC/USD</option>
+                    <option value="ETH/USD">ETH/USD</option>
+                    <option value="TSLA">TSLA</option>
+                    <option value="EUR/USD">EUR/USD</option>
+                    <option value="AAPL">AAPL</option>
+                    <option value="GOLD/USD">GOLD/USD</option>
+                </select>
+                <button type="button" class="action-btn btn-primary" onclick="loadSignals()">Show Signals</button>
+            </form>
+            <div id="signalResults" style="margin-top:2rem;">
+                <!-- Live signals and news will appear here -->
+            </div>
+        </section>
+    </main>
+    <div class="floating-widget" id="assistantWidget" title="Chat with AI Assistant">🤖</div>
+    <script src="assets/script.js"></script>
+    <script>
+        function loadSignals() {
+            const market = document.getElementById('marketSelect').value;
+            const signalResults = document.getElementById('signalResults');
+            // Simulate live data
+            signalResults.innerHTML = `
+            <div class="widget">
+                <h3>🎯 AI Signal - ${market}</h3>
+                <div><b>Direction:</b> ${['Long','Short'][Math.floor(Math.random()*2)]}</div>
+                <div><b>Entry:</b> $${(Math.random()*10000+1000).toFixed(2)}</div>
+                <div><b>Target:</b> $${(Math.random()*10000+1000).toFixed(2)}</div>
+                <div><b>Stop:</b> $${(Math.random()*10000+1000).toFixed(2)}</div>
+                <div><b>Confidence:</b> ${(70+Math.random()*30).toFixed(1)}%</div>
+                <div><b>Risk:</b> ${['Low','Medium','High'][Math.floor(Math.random()*3)]}</div>
+            </div>
+            <div class="widget">
+                <h3>📰 News Analysis - ${market}</h3>
+                <ul>
+                    <li><b>Headline:</b> ${market} shows ${['bullish','bearish','neutral'][Math.floor(Math.random()*3)]} momentum after recent events.</li>
+                    <li><b>Update:</b> Market reacts to latest Fed policy and tech sector earnings.</li>
+                    <li><b>Sentiment:</b> ${['Bullish','Bearish','Neutral'][Math.floor(Math.random()*3)]}</li>
+                </ul>
+            </div>
+            `;
+        }
+        window.onload = loadSignals;
+    </script>
+</body>
+</html>

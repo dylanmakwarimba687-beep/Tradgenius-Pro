@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeGenius Pro - Alerts</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">TradeGenius Pro</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="signals.html">Signals</a></li>
+                <li><a href="analysis.html">Analysis</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="alerts.html">Alerts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-container">
+        <section class="hero">
+            <h1>🚨 Live Market Alerts</h1>
+            <p>See latest AI-powered market alerts and set up your own notifications.</p>
+        </section>
+        <section>
+            <div class="widget" id="alertSystem">
+                <h3>Recent Alerts</h3>
+                <div class="alert-item"><strong>BREAKOUT ALERT:</strong> BTC/USD breaks resistance!</div>
+                <div class="alert-item"><strong>MOMENTUM SHIFT:</strong> TSLA strong bullish momentum!</div>
+                <div class="alert-item"><strong>TARGET REACHED:</strong> EUR/USD hit projected target!</div>
+                <div class="alert-item"><strong>HOT SIGNAL:</strong> ADA/USD high probability setup!</div>
+            </div>
+        </section>
+        <section class="ai-assistant" id="aiAssistantSection">
+            <h2>🤖 AI Trading Assistant</h2>
+            <p>Ask anything about market alerts or set up custom notifications.</p>
+            <div class="ai-chat" id="aiChat">
+                <div style="color: #00ff88; margin-bottom: 1rem;">
+                    <strong>AI Assistant:</strong> Want custom alerts? Just ask!
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Ask about alert setups, notifications..." />
+                <button id="aiSendBtn">Send</button>
+            </div>
+        </section>
+    </main>
+    <div class="floating-widget" id="assistantWidget" title="Chat with AI Assistant">🤖</div>
+    <script src="assets/script.js"></script>
+</body>
+</html>

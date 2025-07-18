@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeGenius Pro - Portfolio</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">TradeGenius Pro</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="signals.html">Signals</a></li>
+                <li><a href="analysis.html">Analysis</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="alerts.html">Alerts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-container">
+        <section class="hero">
+            <h1>Smart Portfolio Management</h1>
+            <p>Track your assets, performance, and risk.</p>
+        </section>
+        <section>
+            <div class="widget">
+                <h3>💼 Portfolio Overview</h3>
+                <table>
+                    <tr><th>Asset</th><th>Quantity</th><th>P&L</th><th>Value</th></tr>
+                    <tr><td>BTC</td><td>2.45</td><td style="color:#00ff88;">+$2,845.30</td><td>$110,814.23</td></tr>
+                    <tr><td>TSLA</td><td>150</td><td style="color:#00ff88;">+$1,275.00</td><td>$37,275.00</td></tr>
+                    <tr><td>EUR/USD</td><td>50,000</td><td style="color:#ff6b6b;">-$125.50</td><td>$54,225.00</td></tr>
+                </table>
+            </div>
+            <div class="widget">
+                <h3>🎚️ Risk Management</h3>
+                <p>Your portfolio risk is optimally balanced with current market conditions.</p>
+            </div>
+        </section>
+        <section class="ai-assistant" id="aiAssistantSection">
+            <h2>🤖 AI Trading Assistant</h2>
+            <p>Ask about your portfolio, risk, or rebalancing strategies.</p>
+            <div class="ai-chat" id="aiChat">
+                <div style="color: #00ff88; margin-bottom: 1rem;">
+                    <strong>AI Assistant:</strong> Need help optimizing your portfolio?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Ask about portfolio, allocation, risk..." />
+                <button id="aiSendBtn">Send</button>
+            </div>
+        </section>
+    </main>
+    <div class="floating-widget" id="assistantWidget" title="Chat with AI Assistant">🤖</div>
+    <script src="assets/script.js"></script>
+</body>
+</html>
