@@ -1,0 +1,506 @@
+{% extends "base.html" %}
+
+{% block title %}TradeGenius Pro - AI-Powered Trading Signals for All Markets{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-gradient-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="display-4 fw-bold mb-4">
+                        AI-Powered Trading Signals
+                        <span class="text-warning">for Every Market</span>
+                    </h1>
+                    <p class="lead mb-4">
+                        Get 90%+ accurate trading signals powered by advanced AI algorithms. 
+                        Covering Forex, Crypto, Stocks, Futures, and more with real-time 
+                        news analysis and social sentiment tracking.
+                    </p>
+                    <div class="feature-badges mb-4">
+                        <span class="badge bg-success me-2 p-2">
+                            <i class="fas fa-chart-line me-1"></i>AI-Powered
+                        </span>
+                        <span class="badge bg-info me-2 p-2">
+                            <i class="fas fa-globe me-1"></i>All Markets
+                        </span>
+                        <span class="badge bg-warning text-dark me-2 p-2">
+                            <i class="fas fa-crown me-1"></i>Premium Features
+                        </span>
+                        <span class="badge bg-danger me-2 p-2">
+                            <i class="fas fa-shield-alt me-1"></i>Trademark Protected
+                        </span>
+                    </div>
+                    <div class="cta-buttons">
+                        {% if not current_user.is_authenticated %}
+                        <a href="{{ url_for('register') }}" class="btn btn-warning btn-lg me-3">
+                            <i class="fas fa-rocket me-2"></i>Start Free Trial
+                        </a>
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                        {% else %}
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-warning btn-lg me-3">
+                            <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+                        </a>
+                        {% if not current_user.is_premium_active() %}
+                        <button class="btn btn-outline-light btn-lg" onclick="upgradeToPremium()">
+                            <i class="fas fa-crown me-2"></i>Upgrade to Premium
+                        </button>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image">
+                    <div class="trading-dashboard-preview">
+                        <div class="card bg-dark border-0 shadow-lg">
+                            <div class="card-body">
+                                <h5 class="text-warning mb-3">
+                                    <i class="fas fa-signal me-2"></i>Live Signals
+                                </h5>
+                                <div class="signal-item mb-3 p-3 bg-success bg-opacity-10 rounded">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong class="text-success">EUR/USD</strong>
+                                            <span class="badge bg-success ms-2">BUY</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="text-success fw-bold">92% Accuracy</div>
+                                            <small class="text-muted">2 min ago</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="signal-item mb-3 p-3 bg-primary bg-opacity-10 rounded">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong class="text-primary">BTC/USDT</strong>
+                                            <span class="badge bg-success ms-2">STRONG BUY</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="text-success fw-bold">94% Accuracy</div>
+                                            <small class="text-muted">5 min ago</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="signal-item p-3 bg-danger bg-opacity-10 rounded">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong class="text-danger">AAPL</strong>
+                                            <span class="badge bg-danger ms-2">SELL</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="text-success fw-bold">89% Accuracy</div>
+                                            <small class="text-muted">8 min ago</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section py-5 bg-dark">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-white mb-3">
+                Comprehensive AI Trading Platform
+            </h2>
+            <p class="lead text-muted">
+                Advanced features powered by machine learning and real-time data analysis
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card card bg-secondary border-0 h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-brain fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title text-white">AI Signal Generation</h5>
+                        <p class="card-text text-muted">
+                            Advanced machine learning algorithms analyze market patterns, 
+                            technical indicators, and sentiment data to generate high-accuracy signals.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card card bg-secondary border-0 h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-newspaper fa-3x text-warning"></i>
+                        </div>
+                        <h5 class="card-title text-white">News Analysis</h5>
+                        <p class="card-text text-muted">
+                            Real-time news sentiment analysis from multiple sources 
+                            to identify market-moving events and their impact on prices.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card card bg-secondary border-0 h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-users fa-3x text-info"></i>
+                        </div>
+                        <h5 class="card-title text-white">Social Sentiment</h5>
+                        <p class="card-text text-muted">
+                            Monitor social media sentiment and community discussions 
+                            to gauge market psychology and crowd behavior.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card card bg-secondary border-0 h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-chart-area fa-3x text-success"></i>
+                        </div>
+                        <h5 class="card-title text-white">Technical Analysis</h5>
+                        <p class="card-text text-muted">
+                            Comprehensive technical analysis with 50+ indicators, 
+                            pattern recognition, and automated chart analysis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card card bg-secondary border-0 h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-globe fa-3x text-danger"></i>
+                        </div>
+                        <h5 class="card-title text-white">All Markets</h5>
+                        <p class="card-text text-muted">
+                            Coverage of Forex pairs, Cryptocurrencies, Stocks, 
+                            Futures, Commodities, and Indices from global markets.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card card bg-secondary border-0 h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-bell fa-3x text-warning"></i>
+                        </div>
+                        <h5 class="card-title text-white">Real-time Alerts</h5>
+                        <p class="card-text text-muted">
+                            Instant notifications for high-probability trading opportunities 
+                            with customizable alert preferences.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Markets Section -->
+<section class="markets-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Supported Markets</h2>
+            <p class="lead text-muted">
+                Comprehensive coverage across all major financial markets
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="market-card card border-0 shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-exchange-alt fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Forex</h5>
+                        <p class="card-text text-muted">Major, Minor & Exotic Currency Pairs</p>
+                        <ul class="list-unstyled small">
+                            <li>EUR/USD, GBP/USD, USD/JPY</li>
+                            <li>AUD/CAD, NZD/CHF</li>
+                            <li>USD/TRY, EUR/ZAR</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="market-card card border-0 shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <i class="fab fa-bitcoin fa-3x text-warning mb-3"></i>
+                        <h5 class="card-title">Cryptocurrency</h5>
+                        <p class="card-text text-muted">Major Cryptocurrencies & Altcoins</p>
+                        <ul class="list-unstyled small">
+                            <li>BTC, ETH, ADA, DOT</li>
+                            <li>LINK, UNI, AVAX</li>
+                            <li>SOL, MATIC, ATOM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="market-card card border-0 shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Stocks</h5>
+                        <p class="card-text text-muted">US & International Equities</p>
+                        <ul class="list-unstyled small">
+                            <li>AAPL, GOOGL, MSFT</li>
+                            <li>TSLA, AMZN, META</li>
+                            <li>NVDA, AMD, NFLX</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="market-card card border-0 shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-industry fa-3x text-info mb-3"></i>
+                        <h5 class="card-title">Futures</h5>
+                        <p class="card-text text-muted">Commodities & Index Futures</p>
+                        <ul class="list-unstyled small">
+                            <li>Gold, Silver, Oil</li>
+                            <li>Natural Gas, Wheat</li>
+                            <li>S&P 500, NASDAQ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="pricing-section py-5 bg-dark">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold text-white mb-3">
+                Choose Your Plan
+            </h2>
+            <p class="lead text-muted">
+                Start with our free plan or upgrade to premium for maximum accuracy
+            </p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6 mb-4">
+                <div class="card bg-secondary border-0 h-100">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-4">
+                            <h4 class="card-title text-white">Free Plan</h4>
+                            <div class="price-tag">
+                                <span class="h2 text-white">$0</span>
+                                <span class="text-muted">/month</span>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Basic AI signals (75% accuracy)
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Limited market coverage
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Standard technical analysis
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Basic portfolio tracking
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-times text-danger me-2"></i>
+                                Premium features locked
+                            </li>
+                        </ul>
+                        <div class="text-center mt-4">
+                            <a href="{{ url_for('register') }}" class="btn btn-outline-light btn-lg w-100">
+                                Get Started Free
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-5 col-md-6 mb-4">
+                <div class="card bg-warning text-dark border-0 h-100 position-relative">
+                    <div class="position-absolute top-0 start-50 translate-middle">
+                        <span class="badge bg-danger px-3 py-2">MOST POPULAR</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="text-center mb-4">
+                            <h4 class="card-title">Premium Plan</h4>
+                            <div class="price-tag">
+                                <span class="h2">$49</span>
+                                <span class="text-muted">/month</span>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                High-accuracy signals (90%+)
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                All markets coverage
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Advanced AI analysis
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Real-time news & sentiment
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                Priority support
+                            </li>
+                        </ul>
+                        <div class="text-center mt-4">
+                            {% if current_user.is_authenticated %}
+                            <button class="btn btn-dark btn-lg w-100" onclick="upgradeToPremium()">
+                                <i class="fas fa-crown me-2"></i>Upgrade Now
+                            </button>
+                            {% else %}
+                            <a href="{{ url_for('register') }}" class="btn btn-dark btn-lg w-100">
+                                <i class="fas fa-crown me-2"></i>Start Premium
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <div class="stat-item">
+                    <div class="stat-number h2 text-primary fw-bold">90%+</div>
+                    <div class="stat-label text-muted">Signal Accuracy</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stat-item">
+                    <div class="stat-number h2 text-success fw-bold">10,000+</div>
+                    <div class="stat-label text-muted">Active Traders</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stat-item">
+                    <div class="stat-number h2 text-warning fw-bold">500+</div>
+                    <div class="stat-label text-muted">Instruments Covered</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stat-item">
+                    <div class="stat-number h2 text-info fw-bold">24/7</div>
+                    <div class="stat-label text-muted">Market Monitoring</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section py-5 bg-gradient-primary text-white">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-3">
+            Ready to Start Trading with AI?
+        </h2>
+        <p class="lead mb-4">
+            Join thousands of successful traders using TradeGenius Pro
+        </p>
+        {% if not current_user.is_authenticated %}
+        <a href="{{ url_for('register') }}" class="btn btn-warning btn-lg me-3">
+            <i class="fas fa-rocket me-2"></i>Start Free Trial
+        </a>
+        {% else %}
+        <a href="{{ url_for('dashboard') }}" class="btn btn-warning btn-lg">
+            <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+        </a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+    }
+    
+    .market-card:hover {
+        transform: translateY(-3px);
+        transition: transform 0.3s ease;
+    }
+    
+    .trademark {
+        font-size: 0.7em;
+        vertical-align: super;
+    }
+    
+    .signal-item {
+        border-left: 4px solid var(--bs-success);
+    }
+    
+    .trading-dashboard-preview {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .stat-number {
+        font-size: 3rem;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-section {
+            min-height: auto;
+            padding: 100px 0;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+        }
+    }
+</style>
+{% endblock %}

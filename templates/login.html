@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}Login - TradeGenius Pro{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-lg-5 col-md-7">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold text-primary">
+                                <i class="fas fa-chart-line me-2"></i>
+                                TradeGenius Pro<span class="trademark">®</span>
+                            </h2>
+                            <p class="text-muted">Sign in to your account</p>
+                        </div>
+                        
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">
+                                        <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">
+                                    Remember me
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
+                                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                            </button>
+                        </form>
+                        
+                        <div class="text-center">
+                            <p class="mb-2">
+                                <a href="#" class="text-decoration-none">Forgot your password?</a>
+                            </p>
+                            <p>
+                                Don't have an account? 
+                                <a href="{{ url_for('register') }}" class="text-decoration-none fw-bold">Sign up</a>
+                            </p>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <div class="text-center">
+                            <p class="small text-muted mb-0">
+                                Demo Account: <strong>admin</strong> / <strong>admin123</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <p class="text-muted small">
+                        © 2024 TradeGenius Pro<span class="trademark">®</span>. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-wrapper {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding-top: 80px;
+    }
+    
+    .card {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.95);
+    }
+    
+    .input-group-text {
+        background: transparent;
+        border-right: none;
+    }
+    
+    .form-control {
+        border-left: none;
+    }
+    
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    
+    .trademark {
+        font-size: 0.7em;
+        vertical-align: super;
+    }
+    
+    @media (max-width: 768px) {
+        .auth-wrapper {
+            padding-top: 100px;
+        }
+        
+        .card-body {
+            padding: 2rem !important;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function togglePassword() {
+        const passwordField = document.getElementById('password');
+        const toggleIcon = document.getElementById('togglePasswordIcon');
+        
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+    }
+    
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            username: document.getElementById('username').value,
+            password: document.getElementById('password').value
+        };
+        
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                localStorage.setItem('access_token', data.access_token);
+                window.location.href = '/dashboard';
+            } else {
+                alert(data.message || 'Login failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Login failed. Please try again.');
+        });
+    });
+</script>
+{% endblock %}
